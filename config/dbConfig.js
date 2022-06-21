@@ -1,4 +1,6 @@
+const sql = require('mssql');
 const Server = process.env.SERVER;
+
 const Database = process.env.DATABASE;
 const User = process.env.USER;
 const Password = process.env.PASSWORD;
