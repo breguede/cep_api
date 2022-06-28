@@ -11,10 +11,17 @@ export default async function handler(request, response) {
         
       let analistas = await pool.request()
           .query(`Select * from Rede_WAnalistas WHERE cod_analista = ${id}`);
-        const resultado = analistas.recordsets
+        const resultado = await analistas.recordsets
+
+        var normalResults = resultado.map((mysqlObj, index) => {
+          return Object.assign({}, mysqlObj);
+      });
+     
+
+
     
-    response.setHeader('Cache-Control','s-maxage=10,stale-while-revalidate');
+   response.setHeader('Cache-Control','s-maxage=10,stale-while-revalidate');
     
-    return response.json(resultado[0]);
+     return response.json(normalResults);
     
   }
